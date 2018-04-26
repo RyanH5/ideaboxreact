@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/form';
+import CardContainer from './components/cardContainer';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      ideas: []
+    }
+  }
+
+  addIdea(ID, Title, Body) {
+    let newIdea = {
+      ID: ID,
+      Title: Title,
+      Body
+    }
+
+    this.setState({
+      ideas: [...this.state.ideas, newIdea]})
+  }
+
+  deleteIdea(id) {
+
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">
+          idea
+          <span className="title-span">
+          box</span>
+          </h1>
+          <Form {...this.state} />
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <main>          
+          <CardContainer ideas={this.state.ideas} />
+        </main>
       </div>
     );
   }
