@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       ideas: []
     }
-    this.addIdea = this.addIdea.bind(this)
+    this.addIdea = this.addIdea.bind(this);
+    this.deleteIdea = this.deleteIdea.bind(this);
   }
 
   addIdea(ID, Title, Body) {
@@ -19,12 +20,38 @@ class App extends Component {
       Body
     }
 
+    localStorage.setItem(ID, JSON.stringify(newIdea));
+
     this.setState({
-      ideas: [...this.state.ideas, newIdea]})
+      ideas: [...this.state.ideas, newIdea]});
   }
 
-  deleteIdea(id) {
+  
 
+  deleteIdea(ID) {
+    localStorage.removeItem(ID);
+
+    let storageKeys = Object.keys(localStorage)
+    let storedIdeas = []
+    storageKeys.forEach(key => {
+      storedIdeas.push(JSON.parse(localStorage.getItem(key)))
+    })
+
+    this.setState({
+      ideas: storedIdeas
+    })
+  }
+
+  componentDidMount() {
+   let storageKeys = Object.keys(localStorage)
+    let storedIdeas = []
+    storageKeys.forEach(key => {
+      storedIdeas.push(JSON.parse(localStorage.getItem(key)))
+    })
+
+    this.setState({
+      ideas: storedIdeas
+    })
   }
 
   render() {
@@ -45,7 +72,7 @@ class App extends Component {
         </header>
         <main>          
           <CardContainer 
-            ideas={this.state.ideas} />
+            ideas={this.state.ideas} deleteIdea={this.deleteIdea} />
         </main>
       </div>
     );
