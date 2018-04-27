@@ -8,10 +8,11 @@ class Form extends Component {
       body: '',
     }
 
-    // this.handleInput = this.handleInput.bind(this)
+    this.handleInput = this.handleInput.bind(this);
+    this.submitIdea = this.submitIdea.bind(this);
   }
 
-  handleInput = (event) => {
+  handleInput(event) {
     let key = event.target.name
     this.setState({[key]: event.target.value})
   }
