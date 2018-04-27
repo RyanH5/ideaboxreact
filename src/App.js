@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       ideas: []
     }
+    this.addIdea = this.addIdea.bind(this)
   }
 
   addIdea(ID, Title, Body) {
@@ -28,17 +29,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">
+      <div 
+        className="App">
+        <header 
+          className="App-header">
+          <h1 
+            className="App-title">
           idea
-          <span className="title-span">
+          <span 
+            className="title-span">
           box</span>
           </h1>
-          <Form {...this.state} />
+          <Form 
+            addIdea={this.addIdea} />
         </header>
         <main>          
-          <CardContainer ideas={this.state.ideas} />
+          <CardContainer 
+            ideas={this.state.ideas} />
         </main>
       </div>
     );
